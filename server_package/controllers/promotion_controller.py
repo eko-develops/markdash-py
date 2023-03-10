@@ -20,7 +20,11 @@ class PromotionController:
                     "title": promotion.title,
                     "description": promotion.description,
                     "date_posted": promotion.date_posted,
-                    "author": promotion.user_id,
+                    "author": {
+                        "id": promotion.author.id,
+                        "username": promotion.author.username,
+                        "email": promotion.author.email,
+                    },
                 }
             )
         return promotions_list
