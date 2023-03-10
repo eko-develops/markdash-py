@@ -5,13 +5,28 @@ from flask import request
 from server_package import app
 from server_package.controllers.admin_controller import AdminController as AC
 from server_package.controllers.user_controller import UserController as UC
+from server_package.controllers.promotion_controller import PromotionController as PC
 
 
 # Dummy Data
-promotions = [
+dummy_promotions = [
     {"name": "Weekly Wednesday", "description": "10% off every Wednesday, every week"},
     {"name": "Sunday Funday", "description": "20% off all items"},
 ]
+
+
+@app.get("/promotions")
+def promotion_list():
+    promotions = PC.get_all_promotions()
+    return {"promotions": promotions}
+
+
+@app.post("/promotion")
+def create_promotion():
+    promotion_data = request.get_json()
+    promotion = PC.create_promotion(promotion_data)
+
+    return {"new_promotion": promotion}
 
 
 @app.get("/users")
@@ -21,7 +36,7 @@ def user_list():
     return {"users": users}
 
 
-@app.get("/user/<int:id>")
+@app.get("/user/<int:user_id>")
 def user_get(user_id):
     """Returns a single user."""
     user = UC.get_user_by_id(user_id)
