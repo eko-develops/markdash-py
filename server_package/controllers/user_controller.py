@@ -1,5 +1,5 @@
 from server_package import db
-from server_package.models import User
+from server_package.models.user import User
 
 
 class UserController:
