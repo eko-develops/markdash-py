@@ -1,32 +1,7 @@
-"""Module for handling routes with controllers."""
-
 from flask import request
 
 from server_package import app
-from server_package.controllers.admin_controller import AdminController as AC
 from server_package.controllers.user_controller import UserController as UC
-from server_package.controllers.promotion_controller import PromotionController as PC
-
-
-# Dummy Data
-dummy_promotions = [
-    {"name": "Weekly Wednesday", "description": "10% off every Wednesday, every week"},
-    {"name": "Sunday Funday", "description": "20% off all items"},
-]
-
-
-@app.get("/promotions")
-def promotion_list():
-    promotions = PC.get_all_promotions()
-    return {"promotions": promotions}
-
-
-@app.post("/promotion")
-def create_promotion():
-    promotion_data = request.get_json()
-    promotion = PC.create_promotion(promotion_data)
-
-    return {"new_promotion": promotion}
 
 
 @app.get("/users")
@@ -63,17 +38,3 @@ def user_post():
 
     response["message"] = "New user created."
     return {"new_user": new_user}, 201
-
-
-@app.delete("/delete/all")
-def delete_all():
-    """Deletes all tables in the database"""
-    AC.drop_all()
-    return {"message": "Deleted all tables in database"}
-
-
-@app.post("/create/tables")
-def create_tables():
-    """Create tables from Models"""
-    AC.create_tables()
-    return {"message": "Created User and Promotions tables"}
