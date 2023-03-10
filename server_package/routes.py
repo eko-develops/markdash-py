@@ -43,7 +43,7 @@ def user_get(user_id):
 
     if user:
         return {"user": user}
-    return {"user": {}, "message": f"No user found with ID {id}."}, 409
+    return {"user": {}, "message": f"No user found with ID {user_id}."}, 409
 
 
 @app.post("/user")
