@@ -16,3 +16,12 @@ def create_promotion():
     promotion = PC.create_promotion(promotion_data)
 
     return {"new_promotion": promotion}
+
+
+@app.delete("/promotion")
+def delete_promotion():
+    """Delete a promotion by ID."""
+    data = request.get_json()
+    deleted_promo = PC.delete_promo(data)
+
+    return {"deleted_promo": deleted_promo}

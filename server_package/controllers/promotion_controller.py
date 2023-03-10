@@ -48,3 +48,22 @@ class PromotionController:
             "title": promotion.title,
             "description": promotion.description,
         }
+
+    @staticmethod
+    def delete_promo(data):
+        promo_id = data["promotion_id"]
+
+        query = db.select(Promotion).where(Promotion.id == promo_id)
+        promotion = db.session.execute(query).scalar()
+
+        deleted_promotion = {
+            "id": promotion.id,
+            "title": promotion.title,
+            "description": promotion.description,
+            "date_posted": promotion.date_posted,
+        }
+
+        db.session.delete(promotion)
+        db.session.commit()
+
+        return deleted_promotion
