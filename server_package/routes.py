@@ -22,9 +22,9 @@ def user_list():
 
 
 @app.get("/user/<int:id>")
-def user_get(id):
+def user_get(user_id):
     """Returns a single user."""
-    user = UC.get_user_by_id(id)
+    user = UC.get_user_by_id(user_id)
 
     if user:
         return {"user": user}
