@@ -14,15 +14,28 @@ class UserController:
         user_list = []
 
         for user in users:
-            user_list.append(
-                {
-                    "id": user.id,
-                    "username": user.username,
-                    "email": user.email,
-                    "image_file": user.image_file,
-                    "password": user.password,
-                }
-            )
+            user_info_dict = {
+                "id": user.id,
+                "username": user.username,
+                "email": user.email,
+                "image_file": user.image_file,
+                "password": user.password,
+            }
+
+            user_promotions = []
+            for promotion in user.promotions:
+                user_promotions.append(
+                    {
+                        "id": promotion.id,
+                        "title": promotion.title,
+                        "description": promotion.description,
+                        "date_posted": promotion.date_posted,
+                    }
+                )
+
+            user_info_dict["promotions"] = user_promotions
+            user_list.append(user_info_dict)
+
         return user_list
 
     @staticmethod
@@ -32,12 +45,28 @@ class UserController:
         user = db.session.execute(query).scalar()
 
         if user:
-            return {
+            user_info_dict = {
                 "id": user.id,
                 "username": user.username,
                 "email": user.email,
                 "image_file": user.image_file,
             }
+
+            user_promotions = []
+            for promotion in user.promotions:
+                user_promotions.append(
+                    {
+                        "id": promotion.id,
+                        "title": promotion.title,
+                        "description": promotion.description,
+                        "date_posted": promotion.date_posted,
+                    }
+                )
+
+            user_info_dict["promotions"] = user_promotions
+
+            return user_info_dict
+
         return None
 
     @staticmethod
