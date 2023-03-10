@@ -20,6 +20,7 @@ class PromotionController:
                     "title": promotion.title,
                     "description": promotion.description,
                     "date_posted": promotion.date_posted,
+                    "author": promotion.user_id,
                 }
             )
         return promotions_list
