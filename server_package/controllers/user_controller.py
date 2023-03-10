@@ -2,20 +2,6 @@ from server_package import db
 from server_package.models import User
 
 
-class AdminController:
-    """The controller used for handling admin database operations. Development only."""
-
-    @staticmethod
-    def drop_all():
-        """Drops all tables in the database."""
-        db.drop_all()
-
-    @staticmethod
-    def create_tables():
-        """Create tables based on models."""
-        db.create_all()
-
-
 class UserController:
     """The controller used for handling the User model."""
 
@@ -40,9 +26,9 @@ class UserController:
         return user_list
 
     @staticmethod
-    def get_user_by_id(id):
+    def get_user_by_id(user_id):
         """Returns a user by id."""
-        query = db.select(User).where(User.id == id)
+        query = db.select(User).where(User.id == user_id)
         user = db.session.execute(query).scalar()
 
         if user:
@@ -84,6 +70,7 @@ class UserController:
 
     @staticmethod
     def create_user(new_user_data):
+        """Add a new user to the database then return the new user."""
         username = new_user_data["username"]
         if UserController.get_user_by_username(username):
             return -1

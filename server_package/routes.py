@@ -3,7 +3,8 @@
 from flask import request
 
 from server_package import app
-from server_package.controllers import UserController as UC, AdminController as AC
+from server_package.controllers.admin_controller import AdminController as AC
+from server_package.controllers.user_controller import UserController as UC
 
 
 # Dummy Data
