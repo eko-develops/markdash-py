@@ -2,7 +2,7 @@
 
 Simple REST API server made with Flask and SQLAlchemy.
 
-### How to Install
+### Get Started
 
 Create a Python virtual enviroment. This app is built with `Python 3.11.2`.
 
@@ -16,6 +16,18 @@ Start the virtual enviroment and upgrade `pip`. On windows from root of project,
 ```
 source venv/Scripts/activate
 py -m pip install --upgrade pip
+```
+
+From project root, run the following command to download the modules and libraries from `requirements.txt`.
+
+```
+pip install -r requirements.txt
+```
+
+When adding new modules and packages to the project, update the `requirements.txt`.
+
+```
+pip freeze > requirements.txt
 ```
 
 ### Resources
