@@ -1,8 +1,8 @@
-## marketing-dashboard-server
+# marketing-dashboard-server
 
 Simple REST API server made with Flask and SQLAlchemy.
 
-### Get Started
+## Get Started
 
 Create a Python virtual enviroment. This app is built with `Python 3.11.2`.
 
@@ -30,7 +30,31 @@ When adding new modules and packages to the project, update the `requirements.tx
 pip freeze > requirements.txt
 ```
 
-### Resources
+## Migrations
+
+When adding or changing the models/columns in the database. A migration will need to generated and ran. All migrations should be version controlled. Migrations will be handled by [Flask-Migrate](https://github.com/miguelgrinberg/flask-migrate).
+
+If a migration is not enabled or migration folder is missing, run this command first.
+
+```
+flask --app run.py db init
+```
+
+Run this command to generate a migration.
+
+```
+flask --app run.py db migrate -m "migration comment"
+```
+
+Then apply the migration to the database.
+
+```
+flask --app run.py db upgrade
+```
+
+From then on every time a model/column is changed, re-run the `migrate` and `upgrade` commands.
+
+## Resources
 
 [Column keys](https://docs.sqlalchemy.org/en/20/core/metadata.html#sqlalchemy.schema.Column.__init__)
 
