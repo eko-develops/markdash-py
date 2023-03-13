@@ -1,4 +1,4 @@
-from flask import request
+from flask import request, jsonify
 
 from server_package import app
 from server_package.controllers.promotion_controller import PromotionController as PC
@@ -25,3 +25,8 @@ def delete_promotion():
     deleted_promo = PC.delete_promo(data)
 
     return {"deleted_promo": deleted_promo}
+
+
+@app.get("/")
+def home():
+    return jsonify(["from home route"])
