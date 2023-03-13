@@ -20,6 +20,7 @@ class PromotionController:
                     "title": promotion.title,
                     "description": promotion.description,
                     "date_posted": promotion.date_posted,
+                    "scheduled": promotion.scheduled,
                     "author": {
                         "id": promotion.author.id,
                         "username": promotion.author.username,
@@ -61,6 +62,7 @@ class PromotionController:
             "title": promotion.title,
             "description": promotion.description,
             "date_posted": promotion.date_posted,
+            "scheduled": promotion.scheduled,
         }
 
         db.session.delete(promotion)
