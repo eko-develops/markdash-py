@@ -24,6 +24,7 @@ class PromotionController:
                     "date_posted": promotion.date_posted,
                     "start_date": promotion.start_date,
                     "end_date": promotion.end_date,
+                    "scheduled": promotion.scheduled,
                     "author": {
                         "id": promotion.author.id,
                         "username": promotion.author.username,
@@ -69,6 +70,7 @@ class PromotionController:
             "start_date": promo_start_date,
             "end_date": promo_end_date,
             "date_posted": promotion.date_posted,
+            "scheduled": promotion.scheduled,
         }
 
     @staticmethod
@@ -85,6 +87,7 @@ class PromotionController:
             "date_posted": promotion.date_posted,
             "start_date": promotion.start_date,
             "end_date": promotion.end_date,
+            "scheduled": promotion.scheduled,
         }
 
         db.session.delete(promotion)
