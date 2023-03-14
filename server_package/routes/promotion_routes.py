@@ -27,6 +27,9 @@ def delete_promotion():
     return {"deleted_promo": deleted_promo}
 
 
-@app.get("/")
-def home():
-    return jsonify(["from home route"])
+@app.post("/promotion/schedule")
+def promotion_schedule():
+    data = request.get_json()
+    scheduled_promotion = PC.set_scheduled(data)
+
+    return {"scheduled_promotion": scheduled_promotion}

@@ -94,3 +94,27 @@ class PromotionController:
         db.session.commit()
 
         return deleted_promotion
+
+    @staticmethod
+    def set_scheduled(data):
+        promo_id = data["id"]
+
+        query = db.select(Promotion).where(Promotion.id == promo_id)
+        promotion = db.session.execute(query).scalar()
+
+        if promotion.scheduled:
+            promotion.scheduled = False
+        else:
+            promotion.scheduled = True
+
+        db.session.commit()
+
+        return {
+            "id": promotion.id,
+            "title": promotion.title,
+            "description": promotion.description,
+            "date_posted": promotion.date_posted,
+            "start_date": promotion.start_date,
+            "end_date": promotion.end_date,
+            "scheduled": promotion.scheduled,
+        }
