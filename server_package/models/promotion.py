@@ -8,7 +8,8 @@ class Promotion(db.Model):
     title = db.Column(db.String(30), nullable=False)
     description = db.Column(db.String(120), nullable=False)
     date_posted = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
-    scheduled = db.Column(db.Boolean, default=False)
+    start_date = db.Column(db.DateTime, nullable=True)
+    end_date = db.Column(db.DateTime, nullable=True)
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
 
     def __repr__(self):

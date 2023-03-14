@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from server_package import db
 from server_package.models.promotion import Promotion
 
@@ -20,7 +22,8 @@ class PromotionController:
                     "title": promotion.title,
                     "description": promotion.description,
                     "date_posted": promotion.date_posted,
-                    "scheduled": promotion.scheduled,
+                    "start_date": promotion.start_date,
+                    "end_date": promotion.end_date,
                     "author": {
                         "id": promotion.author.id,
                         "username": promotion.author.username,
@@ -36,9 +39,24 @@ class PromotionController:
         promo_title = new_promotion["title"]
         promo_description = new_promotion["description"]
         promo_author = new_promotion["user_id"]
+        promo_start_date = new_promotion["start_date"]
+        promo_end_date = new_promotion["end_date"]
+
+        if promo_start_date:
+            promo_start_date = datetime.fromisoformat(promo_start_date)
+        else:
+            promo_start_date = None
+        if promo_end_date:
+            promo_end_date = datetime.fromisoformat(promo_end_date)
+        else:
+            promo_end_date = None
 
         promotion = Promotion(
-            title=promo_title, description=promo_description, user_id=promo_author
+            title=promo_title,
+            description=promo_description,
+            user_id=promo_author,
+            start_date=promo_start_date,
+            end_date=promo_end_date,
         )
 
         db.session.add(promotion)
@@ -48,6 +66,9 @@ class PromotionController:
             "id": promotion.id,
             "title": promotion.title,
             "description": promotion.description,
+            "start_date": promo_start_date,
+            "end_date": promo_end_date,
+            "date_posted": promotion.date_posted,
         }
 
     @staticmethod
@@ -62,7 +83,8 @@ class PromotionController:
             "title": promotion.title,
             "description": promotion.description,
             "date_posted": promotion.date_posted,
-            "scheduled": promotion.scheduled,
+            "start_date": promotion.start_date,
+            "end_date": promotion.end_date,
         }
 
         db.session.delete(promotion)
