@@ -14,3 +14,8 @@ def create_tables():
     """Create tables from Models"""
     AC.create_tables()
     return {"message": "Created User and Promotions tables"}
+
+
+@app.post("/create/data")
+def create_dummy_data():
+    return {"message": AC.create_data()}

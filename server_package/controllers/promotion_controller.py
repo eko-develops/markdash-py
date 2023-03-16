@@ -2,6 +2,7 @@ from datetime import datetime, timezone
 
 from server_package import db
 from server_package.models.promotion import Promotion
+from server_package.utils import Utils
 
 
 class PromotionController:
@@ -43,19 +44,8 @@ class PromotionController:
         promo_start_date = new_promotion["start_date"]
         promo_end_date = new_promotion["end_date"]
 
-        if promo_start_date:
-            promo_start_date = datetime.fromisoformat(promo_start_date).replace(
-                tzinfo=timezone.utc
-            )
-        else:
-            promo_start_date = None
-
-        if promo_end_date:
-            promo_end_date = datetime.fromisoformat(promo_end_date).replace(
-                tzinfo=timezone.utc
-            )
-        else:
-            promo_end_date = None
+        promo_start_date = Utils.convertToUTC(promo_start_date)
+        promo_end_date = Utils.convertToUTC(promo_end_date)
 
         promotion = Promotion(
             title=promo_title,
