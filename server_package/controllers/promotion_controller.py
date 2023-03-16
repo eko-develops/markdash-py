@@ -70,7 +70,7 @@ class PromotionController:
 
     @staticmethod
     def delete_promo(data):
-        promo_id = data["promotion_id"]
+        promo_id = data["id"]
 
         query = db.select(Promotion).where(Promotion.id == promo_id)
         promotion = db.session.execute(query).scalar()
