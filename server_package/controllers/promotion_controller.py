@@ -1,5 +1,3 @@
-from datetime import datetime, timezone
-
 from server_package import db
 from server_package.models.promotion import Promotion
 from server_package.utils import Utils
